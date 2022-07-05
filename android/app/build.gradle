@@ -140,7 +140,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.amazon.theodorejacobi.tootazbrutingapp"
+        applicationId "com.amazon.choosimagequicgame"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -203,6 +203,8 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
 
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {

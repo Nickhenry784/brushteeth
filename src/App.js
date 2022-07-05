@@ -8,10 +8,10 @@ import {PersistGate} from 'redux-persist/integration/react';
 
 import HomeScreen from './screens/HomeScreen';
 import BuyScreen from './screens/BuyScreen';
-import PlayScreen from './screens/PlayScreen';
 
 import {store, persistor} from './redux/store';
 import {LogBox} from 'react-native';
+import PlayScreen from './screens/PlayScreen';
 
 const Stack = createStackNavigator();
 
