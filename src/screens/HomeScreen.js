@@ -27,8 +27,8 @@ const HomeScreen = () => {
   const [minutes, setMinutes] = useState(0);
   const [second, setSecond] = useState(0);
   const [start, setStart] = useState(false);
+  const [success, setSuccess] = useState(false);
   const dispatch = useDispatch();
-  const [isSelected, setSelection] = useState(false);
 
 
   useEffect(() => {
@@ -47,6 +47,7 @@ const HomeScreen = () => {
       }
       if(start && second === 0 && minutes === 0 && time === 0 ){
         setStart(false);
+        setSuccess(true);
       };
     },1000);
 
@@ -73,49 +74,37 @@ const HomeScreen = () => {
     setStart(true);
   }
 
-
   return (
     <ImageBackground style={appStyle.homeView} source={images.background}>
       <View style={appStyle.appBar}>
+        <Text style={appStyle.turnText}>{`Turn: ${points.value}`}</Text>
         <TouchableOpacity onPress={onClickTurnButton}>
           <View style={appStyle.turnView}>
-            <Image source={images.buy_icon} style={appStyle.buyImage} />
-            <Text style={appStyle.turnText}>{points.value}</Text>
+            <Image source={images.iconbuy} style={appStyle.buyImage} />
           </View>
         </TouchableOpacity>
       </View>
-      <Text style={appStyle.labelText1}>Set Time</Text>
-      <View style={appStyle.centerView}>
-        <Image source={images.clock} style={appStyle.scoreStyle} />
-        <CheckBox
-          value={isSelected}
-          onValueChange={setSelection}
-          style={appStyle.checkbox}
-        />
-        <Text style={appStyle.labelText}>Minutes</Text>
-      </View>
+      <ImageBackground style={appStyle.centerView} source={images.frame}>
+        <Text style={appStyle.timeText}>{`${time} : ${minutes} : ${second}`}</Text>
+      </ImageBackground>
       <TouchableOpacity onPress={onClickStartButton}>
         <Image source={images.start} style={appStyle.createButton} />
       </TouchableOpacity>
-      {start && <Text style={appStyle.timeText}>{`${time} : ${minutes} : ${second}`}</Text>}
-      <View style={appStyle.bottomView}>
-        <Image style={appStyle.logoImage} source={start ? images.teeth_start : images.teeth_ok} />
-      </View>
       {modalState && <View style={appStyle.modalView}>
           <View style={appStyle.panelModal}>
-            <Text style={appStyle.labelText}>Time:</Text>
+            <Text style={appStyle.labelText}>Time</Text>
             <View style={appStyle.timeInput}>
               <TextInput
               style={appStyle.input}
-              onChangeText={isSelected ? setMinutes : setTime}
-              value={isSelected ? minutes : time}
+              onChangeText={setTime}
+              value={time.toString()}
               keyboardType="numeric"
               />
               <Text style={appStyle.labelText}>:</Text>
               <TextInput
               style={appStyle.input}
-              onChangeText={setSecond}
-              value={second}
+              onChangeText={setMinutes}
+              value={minutes.toString()}
               keyboardType="numeric"
               />
             </View>
@@ -124,6 +113,11 @@ const HomeScreen = () => {
             </TouchableOpacity>
           </View>
         </View>}
+        { success && <View style={appStyle.modalView}>
+            <TouchableOpacity onPress={() => setSuccess(false)}>
+              <Image source={images.success} style={appStyle.backStyle} />
+            </TouchableOpacity>
+          </View>}
     </ImageBackground>
   );
 };
@@ -178,21 +172,22 @@ export const appStyle = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     padding: 10,
+    textAlign: 'center',
+    fontSize: 20,
   },
   appBar: {
-    flex: 0.4,
-    paddingRight: 20,
+    flex: 0.2,
+    paddingHorizontal: 20,
     width: '100%',
     alignItems: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
   },
   turnView: {
     flexDirection: 'row',
-    width: windowWidth * 0.15,
-    marginRight: 10,
+    width: windowWidth * 0.1,
     height: '100%',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   centerImage: {
@@ -208,25 +203,24 @@ export const appStyle = StyleSheet.create({
     margin: 8,
   },
   turnText: {
-    fontSize: windowWidth > 640 ? 30 : 25,
+    fontSize: 20,
     fontWeight: 'bold',
-    color: 'black',
+    color: '#00aeef',
   },
   labelText1: {
     marginTop: 30,
-    fontSize: windowWidth > 640 ? 30 : 20,
-    color: 'black',
+    fontSize: 30,
+    color: '#00aeef',
     fontWeight: 'bold',
   },
   labelText: {
-    fontSize: windowWidth > 640 ? 30 : 20,
-    color: 'black',
+    fontSize: 30,
+    color: '#00aeef',
     fontWeight: 'bold',
   },
   timeText: {
-    fontSize: windowWidth > 640 ? 40 : 30,
-    color: 'black',
-    fontWeight: 'bold',
+    fontSize: 60,
+    color: '#00aeef',
   },
   buyImage: {
     width: windowWidth * 0.1,
@@ -234,12 +228,11 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   centerView: {
-    flex: 0.2,
-    flexDirection: 'row',
-    width: '50%',
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.5,
+    resizeMode: 'contain',
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginVertical: 20,
+    justifyContent: 'center',
   },
   bottomView: {
     marginTop: windowHeight * 0.2,
@@ -255,8 +248,8 @@ export const appStyle = StyleSheet.create({
     resizeMode: 'contain',
   },
   backStyle: {
-    width: windowWidth * 0.2,
-    height: windowWidth * 0.2,
+    width: windowWidth * 0.8,
+    height: windowWidth * 0.8,
     resizeMode: 'contain',
   },
 });

@@ -1,4 +1,4 @@
-package com.amazon.theodorejacobi.tootazbrutingapp;
+package com.amazon.schedulealesson;
 
 import com.facebook.react.ReactActivity;
 

@@ -131,7 +131,6 @@ export default function App() {
                 <TouchableOpacity
                   onPress={() => handleRequestBuy(product.productId)}
                   style={styles.item3Content}>
-                  {/* <Image source={turnlogo} style={styles.d} /> */}
                   <Text style={styles.price}>{product.localizedPrice}</Text>
                   <Text style={styles.descr}>{product.description}</Text>
                 </TouchableOpacity>
@@ -145,7 +144,6 @@ export default function App() {
                 <TouchableOpacity
                   onPress={() => handleRequestBuy(product.productId)}
                   style={styles.item3Content}>
-                  {/* <Image source={turnlogo} style={styles.d} /> */}
                   <Text style={styles.price}>{product.localizedPrice}</Text>
                   <Text style={styles.descr}>{product.description}</Text>
                 </TouchableOpacity>
@@ -205,11 +203,11 @@ const styles = StyleSheet.create({
   price: {
     fontWeight: 'bold',
     fontSize: 16,
-    color: '#212121',
+    color: '#00aeef',
   },
   descr: {
     fontSize: 14,
-    color: '#212121',
+    color: '#00aeef',
     fontWeight: '500',
   },
   itemList: {},
