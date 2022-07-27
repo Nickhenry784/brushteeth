@@ -1,5 +1,5 @@
 export const images = {
-  background: require('./images/background.png'),
+  background: require('./images/Background.png'),
   turn: require('./images/turn.png'),
   phone: require('./images/phone.png'),
   play: require('./images/play.png'),
